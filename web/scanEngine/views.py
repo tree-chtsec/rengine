@@ -245,6 +245,12 @@ def tool_specific_settings(request):
             messages.add_message(request, messages.INFO, 'theHarvester config updated!')
             return http.HttpResponseRedirect(reverse('tool_settings'))
 
+        elif 'oneforall_config_text_area' in request.POST:
+            with open('/usr/src/github/OneForAll/config/setting.py', "w") as fhandle:
+                fhandle.write(request.POST.get('oneforall_config_text_area'))
+            messages.add_message(request, messages.INFO, 'OneForAll config updated!')
+            return http.HttpResponseRedirect(reverse('tool_settings'))
+
     context['settings_nav_active'] = 'active'
     context['tool_settings_li'] = 'active'
     context['settings_ul_show'] = 'show'

@@ -299,19 +299,19 @@ def initiate_scan(
 		skip_subdomain_scan(task, domain, results_dir)
 
 	update_last_activity(activity_id, 2)
-	activity_id = create_scan_activity(task, "HTTP Crawler", 1)
-	http_crawler(
-		task,
-		domain,
-		yaml_configuration,
-		results_dir,
-		activity_id)
-	update_last_activity(activity_id, 2)
 
 	# start wafw00f
 	if(task.waf_detection):
+		activity_id = create_scan_activity(task, "Detecting WAF: HTTP Crawler", 1)
+		http_crawler(
+			task,
+			domain,
+			yaml_configuration,
+			results_dir,
+			activity_id)
+		update_last_activity(activity_id, 2)
 		try:
-			activity_id = create_scan_activity(task, "Detecting WAF", 1)
+			activity_id = create_scan_activity(task, "Detecting WAF: wafw00f", 1)
 			check_waf(task, results_dir)
 			update_last_activity(activity_id, 2)
 		except Exception as e:
@@ -1780,10 +1780,10 @@ def vulnerability_scan(
 		# TODO: create a object in scan engine, to say deep scan then only use unfurl, otherwise it is time consuming
 
 		# if scan_history.scan_type.fetch_url:
-		#     os.system('cat {0}/all_urls.txt | grep -Eiv "\\.(eot|jpg|jpeg|gif|css|tif|tiff|png|ttf|otf|woff|woff2|ico|pdf|svg|txt|js|doc|docx)$" | unfurl -u format %s://%d%p >> {0}/unfurl_urls.txt'.format(results_dir))
-		#     os.system(
-		#         'sort -u {0}/unfurl_urls.txt -o {0}/unfurl_urls.txt'.format(results_dir))
-		#     urls_path = '/unfurl_urls.txt'
+		#	 os.system('cat {0}/all_urls.txt | grep -Eiv "\\.(eot|jpg|jpeg|gif|css|tif|tiff|png|ttf|otf|woff|woff2|ico|pdf|svg|txt|js|doc|docx)$" | unfurl -u format %s://%d%p >> {0}/unfurl_urls.txt'.format(results_dir))
+		#	 os.system(
+		#		 'sort -u {0}/unfurl_urls.txt -o {0}/unfurl_urls.txt'.format(results_dir))
+		#	 urls_path = '/unfurl_urls.txt'
 
 		vulnerability_scan_input_file = results_dir + urls_path
 

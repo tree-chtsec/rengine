@@ -163,6 +163,22 @@ Settings, API Keys & Tool Settings
         </form>
       </div>
     </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">OneForAll</h4>
+        <p>
+          This section lets you modify <a href="https://github.com/shmilylty/OneForAll" class="text-primary" target="_blank">OneForAll</a> config file. You can find more information about the <a href="https://github.com/shmilylty/OneForAll/blob/master/config/setting.py" class="text-primary" target="_blank">OneForAll config here.</a><br>
+          <br>
+          <span class="text-danger">Please note that only Python config is supported.</span>
+        </p>
+        <form method="post" enctype="multipart/form-data" id="oneforall-config-form">
+          {% csrf_token %}
+          <h4 class="header-title">Current OneForAll Configuration</h4>
+          <label for="oneforall_config_text_area">Double click the configuration to edit.</label>
+          <textarea class="form-control" id="oneforall_config_text_area" spellcheck="false" readonly="true" name="oneforall_config_text_area"></textarea>
+        </form>
+      </div>
+    </div>
   </div>
 
 </div>

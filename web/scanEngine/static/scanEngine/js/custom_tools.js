@@ -146,3 +146,21 @@ $("#theharvester_config_text_area").dblclick(function() {
     $("#theharvester-config-form").append('<input type="submit" class="btn btn-primary mt-2 float-end" value="Save Changes" id="theharvester-config-submit">');
   }
 });
+
+// get OneForAll config
+$.getJSON(`/api/getFileContents?oneforall_config&format=json`, function(data) {
+  $("#oneforall_config_text_area").attr("rows", 14);
+  $("textarea#oneforall_config_text_area").html(htmlEncode(data['content']));
+}).fail(function(){
+  $("#oneforall_config_text_area").removeAttr("readonly");
+  $("textarea#oneforall_config_text_area").html(`# Your OneForAll configuration here.`);
+  $("#oneforall-config-form").append('<input type="submit" class="btn btn-primary mt-2 float-right" value="Save Changes" id="oneforall-config-submit">'); 
+});   
+    
+$("#oneforall_config_text_area").dblclick(function() {
+  if (!document.getElementById('oneforall-config-submit')) {
+    $("#oneforall_config_text_area").removeAttr("readonly");
+    $("#oneforall-config-form").append('<input type="submit" class="btn btn-primary mt-2 float-end" value="Save Changes" id="oneforall-config-submit">');
+  }             
+}); 
+

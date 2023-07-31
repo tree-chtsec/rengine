@@ -764,10 +764,10 @@ class UpdateTool(APIView):
 
 		if not update_command:
 			return Response({'status': False, 'message': tool.name + 'has missing update command! Cannot update the tool.'})
-		elif update_command == 'git pull':
+		elif update_command.startswith('git pull'):
 			tool_name = tool.install_command[:-1] if tool.install_command[-1] == '/' else tool.install_command
 			tool_name = tool_name.split('/')[-1]
-			update_command = 'cd /usr/src/github/' + tool_name + ' && git pull && cd -'
+			update_command = 'cd /usr/src/github/' + tool_name + ' && ' + update_command + ' && cd -'
 
 		os.system(update_command)
 		run_system_commands.apply_async(args=(update_command,))
@@ -1018,6 +1018,16 @@ class GetFileContents(APIView):
 
 		if 'theharvester_config' in req.query_params:
 			path = "/usr/src/github/theHarvester/api-keys.yaml"
+			if not os.path.exists(path):
+				os.system('touch {}'.format(path))
+				response['message'] = 'File Created!'
+			f = open(path, "r")
+			response['status'] = True
+			response['content'] = f.read()
+			return Response(response)
+
+		if 'oneforall_config' in req.query_params:
+			path = "/usr/src/github/OneForAll/config/setting.py"
 			if not os.path.exists(path):
 				os.system('touch {}'.format(path))
 				response['message'] = 'File Created!'

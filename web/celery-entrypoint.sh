@@ -59,6 +59,7 @@ if [ ! -d "/usr/src/github/OneForAll" ]
 then
   echo "Cloning OneForAll"
   git clone https://github.com/shmilylty/OneForAll /usr/src/github/OneForAll
+  (cd /usr/src/github/OneForAll && git pull origin master)
 fi
 
 python3 -m pip install -r /usr/src/github/OneForAll/requirements.txt

@@ -47,7 +47,7 @@
       with increased threads.
     github_url: https://github.com/projectdiscovery/httpx
     license_url: https://github.com/projectdiscovery/httpx/blob/master/LICENSE.md
-    version_lookup_command: httpx -version
+    version_lookup_command: /go/bin/httpx -version
     update_command: go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
     install_command: go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
     version_match_regex: v(\d+\.)?(\d+\.)?(\*|\d+)
@@ -70,7 +70,7 @@
     version_lookup_command: naabu -version
     update_command: go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
     install_command: go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
-    version_match_regex: v(\d+\.)?(\d+\.)?(\*|\d+)
+    version_match_regex: (\d+\.)?(\d+\.)?(\*|\d+)
     is_default: true
     is_subdomain_gathering: false
     is_github_cloned: false
@@ -104,8 +104,8 @@
     github_url: https://github.com/owasp-amass/amass
     license_url: https://github.com/owasp-amass/amass/blob/master/LICENSE
     version_lookup_command: amass -version
-    update_command: go install -v github.com/owasp-amass/amass/v3/...@latest
-    install_command: go install -v github.com/owasp-amass/amass/v3/...@latest
+    update_command: go install -v github.com/owasp-amass/amass/v4/...@latest
+    install_command: go install -v github.com/owasp-amass/amass/v4/...@latest
     version_match_regex: v(\d+\.)?(\d+\.)?(\*|\d+)
     is_default: true
     is_subdomain_gathering: true
@@ -212,7 +212,7 @@
     github_url: https://github.com/shmilylty/OneForAll
     license_url: https://github.com/shmilylty/OneForAll/blob/master/LICENSE
     version_lookup_command: null
-    update_command: git pull
+    update_command: git pull origin master
     install_command: git clone https://github.com/shmilylty/OneForAll
     version_match_regex: '[vV]*(\d+\.)?(\d+\.)?(\*|\d+)'
     is_default: true
